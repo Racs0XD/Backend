@@ -318,6 +318,7 @@ def publiUsuario(user_name):
 @app.route('/top/maspublicados')
 def listaPubliUsuario():
     idVideo()   
+    leerJson()
     rankPubliUsiarop = []
     reportePdf = []
 
@@ -355,6 +356,7 @@ def listaPubliUsuario():
 # ---------------------------------------  usuarios  ---------------------------------------
 @app.route('/admin/usuarios/<string:user_name>')
 def getUsuario(user_name):
+    leerJson()
     usuarioEncontrado = [usuarios for usuarios in users if usuarios['username'] == user_name]
     if (len(usuarioEncontrado) > 0):
         return jsonify(usuarioEncontrado[0])
@@ -394,6 +396,7 @@ def getPublication(url):
 @app.route('/admin/usuarios', methods=['POST'])
 @app.route('/registro', methods=['POST'])
 def addUsuario():
+    leerJson()
     new_user = {
         "name": request.json['name'],
         "gender": request.json['gender'],
@@ -495,6 +498,7 @@ def crearPublicacion(tipo):
 
 @app.route('/admin/usuarios/<string:user_name>', methods=['PUT'])
 def editUsuario(user_name):
+    leerJson()
     usuarioEncontrado = [usuarios for usuarios in users if usuarios['username'] == user_name]
 
     if(request.json['name'] == '' or request.json['gender'] == '' or request.json['username'] == '' or request.json['email'] == '' or request.json['password'] == ''):
@@ -591,6 +595,7 @@ def editLikes(url):
 
 @app.route('/admin/usuarios/<string:user_name>', methods=['DELETE'])
 def deleteUsuario(user_name):
+    leerJson()
     userFound = [
         usuarios for usuarios in users if usuarios['username'] == user_name]
     if (len(userFound) > 0):
@@ -643,6 +648,7 @@ def eliminarPublicacion(url):
 
 @app.route('/inicio', methods=['POST'])
 def inicioUsuario():
+    leerJson()
     log_user = {
         "username": request.json['username'],
         "password": request.json['password']
