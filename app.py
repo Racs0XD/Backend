@@ -417,15 +417,20 @@ def addUsuario():
         else:
             validador = False
 
-    for valor in request.json['gender']:
-        if (valor == 'm' or valor == 'M' or valor == 'f' or valor == 'F' ):
-            validador2 = True     
-            break       
-        else:
-            validador2 = False
+    contGen= len(request.json['gender'])
 
-
-    
+  
+    if(contGen <= 1):
+        for valor in request.json['gender']:
+            if (valor == 'm' or valor == 'M' or valor == 'f' or valor == 'F' ):
+                validador2 = True     
+                break       
+            else:
+                validador2 = False
+        if(validador2 == False):
+            return jsonify({"Mensaje": "Ingrese M para masculino o F para femenino"})
+    else: 
+        return jsonify({"Mensaje": "Ingrese M para masculino o F para femenino"})
     if(validador2 == False):
         return jsonify({"Mensaje": "Ingrese M para masculino o F para femenino"})  
     elif(contcontra <= 7):
